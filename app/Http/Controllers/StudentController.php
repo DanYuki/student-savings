@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -27,7 +28,15 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Student::create([
+            'student_name' => addslashes($request->student_name),
+            'student_class' => $request->student_class,
+            'student_nisn' => $request->student_nisn,
+            'date_of_birth' => $request->date_of_birth,
+            'student_gender' => $request->student_gender,
+            'saving_balance' => 0
+        ]);
+        return redirect()->to('dashboard');
     }
 
     /**
@@ -35,7 +44,7 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

@@ -11,6 +11,10 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in! This is from blade") }}
                 </div>
+                <div class="ml-6 mr-6 mb-3">
+                    <a href="{{route('student.add')}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Add Student</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Transactions</a>
+                </div>
             </div>
         </div>
     </div>

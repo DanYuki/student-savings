@@ -27,8 +27,14 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/student/add', function() {
+    return view('students/add');
+})->middleware(['auth', 'verified'])->name('student.add');
+
+Route::post('/student/store', [StudentController::class, 'store'])->middleware(['auth', 'verified'])->name('student.store');
 
 // Route::get('/test', function() {
 //     return Inertia::render(('Test'));
