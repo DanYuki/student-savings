@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,7 +35,11 @@ Route::get('/student/add', function() {
     return view('students/add');
 })->middleware(['auth', 'verified'])->name('student.add');
 
+
 Route::post('/student/store', [StudentController::class, 'store'])->middleware(['auth', 'verified'])->name('student.store');
+
+Route::get('/transaction/add', [TransactionController::class, 'create'])->middleware(['auth', 'verified'])->name('transaction.add');
+Route::post('/transaction/store', [TransactionController::class, 'store'])->middleware(['auth', 'verified'])->name('transaction.store');
 
 // Route::get('/test', function() {
 //     return Inertia::render(('Test'));

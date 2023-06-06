@@ -17,4 +17,6 @@ class Student extends Model
         'student_gender',
         'saving_balance'
     ];
+
+    protected $primaryKey = 'student_id';
 }
