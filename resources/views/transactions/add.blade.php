@@ -8,9 +8,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in! This is from blade") }}
-
+                @if (session('status'))
+                <div class="alert alert-warning" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
                     <form class="w-full max-w-lg mt-3" action="{{route('transaction.store')}}" method="post">
                         @csrf
 
@@ -40,7 +42,6 @@
                         </div>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-1000 text-white font-bold py-2 px-4 rounded">Submit</button>
                     </form>
-                </div>
             </div>
         </div>
     </div>

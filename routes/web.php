@@ -27,6 +27,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/student', [StudentController::class, 'index'])->middleware(['auth', 'verified'])->name('student.index');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -35,6 +37,7 @@ Route::get('/student/add', function() {
     return view('students/add');
 })->middleware(['auth', 'verified'])->name('student.add');
 
+Route::get('/student/show/{id}', [StudentController::class, 'show'])->middleware(['auth', 'verified'])->name('student.show');
 
 Route::post('/student/store', [StudentController::class, 'store'])->middleware(['auth', 'verified'])->name('student.store');
 

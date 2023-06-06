@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Transaction;
 
 class StudentController extends Controller
 {
@@ -12,7 +13,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('test');
+        $students = Student::all();
+
+        return view('students/index', compact('students'));
     }
 
     /**
@@ -42,9 +45,13 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $student_id)
     {
-        
+        $student = Student::find($student_id);
+
+        $transaction_lists = Transaction::where('student_id', $student_id)->get();
+
+        return view('students.show', compact('student', 'transaction_lists'));
     }
 
     /**
