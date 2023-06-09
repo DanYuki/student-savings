@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Transaction;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class StudentController extends Controller
 {
@@ -76,5 +77,35 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function import(){
+        return view('students/import');
+    }
+
+    public function importStore(Request $request){
+        $this->validate($request, [
+            'spreadsheet' => 'required|file|mimes:xlsx,xls'
+        ]);
+        $importFile = $request->file('spreadsheet');
+
+        $reader = IOFactory::createReader("Xlsx");
+        $spreadsheet = $reader->load($importFile);
+        $spreadsheet->setActiveSheetIndex(1);
+        $cellValue = $spreadsheet->getActiveSheet()->rangeToArray('L5:R53', NULL, TRUE, TRUE, TRUE);
+        $count = 0;
+        foreach ($cellValue as $data) {
+            $birthdate = $data['P'];
+            $birthdate = str_replace('/', '-', $birthdate);
+            Student::create([
+                'student_name' => addslashes($data['N']),
+                'class' => $data['R'],
+                'nisn' => $data['L'],
+                'birthdate' => date("Y-m-d", strtotime($birthdate)),
+                'gender' => $data['Q']
+            ]);
+            $count++;
+        }
+        return redirect()->route('student.index')->with('message', 'Berhasil import data sejumlah : ' . $count);
     }
 }

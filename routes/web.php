@@ -44,6 +44,11 @@ Route::post('/student/store', [StudentController::class, 'store'])->middleware([
 Route::get('/transaction/add', [TransactionController::class, 'create'])->middleware(['auth', 'verified'])->name('transaction.add');
 Route::post('/transaction/store', [TransactionController::class, 'store'])->middleware(['auth', 'verified'])->name('transaction.store');
 
+
+// Import Datas
+Route::get('/student/import', [StudentController::class, 'import'])->middleware(['auth', 'verified'])->name('student.import');
+Route::post('/student/import/store', [StudentController::class, 'importStore'])->middleware(['auth', 'verified'])->name('student.import.store');
+
 // Route::get('/test', function() {
 //     return Inertia::render(('Test'));
 // })->middleware(['auth', 'verified'])->name('test');

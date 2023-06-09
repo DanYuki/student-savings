@@ -20,6 +20,7 @@
                     <a href="{{route('student.add')}}" rel="noopener noreferrer" class="btn btn-primary">Add Student</a>
                     <a href="{{route('transaction.add')}}" rel="noopener noreferrer" class="btn btn-primary">Transactions</a>
                     <a href="{{route('student.index')}}" rel="noopener noreferrer" class="btn btn-primary">Show All Students</a>
+                    <a href="{{route('student.import')}}" rel="noopener noreferrer" class="btn btn-primary">Import Student Data</a>
                 </div>
             </div>
         </div>
